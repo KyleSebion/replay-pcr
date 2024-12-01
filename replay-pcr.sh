@@ -6,7 +6,7 @@ q='.. | select(.PCRIndex? and .Digests[0].Digest?) | [.PCRIndex,.Digests[0].Dige
 while read i h; do
   n=$(<<< "${r[i]}$h" xxd -r -p | sha256sum | cut -d ' ' -f 1)
   printf '%-2s sha256( %s || %s ) = %s\n' "$i" "${r[i]}" "$h" "$n"
-  r[i]="$n"
+  r[i]=$n
 done < <(tpm2_eventlog /sys/kernel/security/tpm0/binary_bios_measurements 2>/dev/null | yq -r "$q")
 i=0
 while read h; do
