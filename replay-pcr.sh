@@ -1,5 +1,5 @@
 #!/bin/bash
-apt -y install tpm2-tools yq &> /dev/null
+apt -y install tpm2-tools yq xxd &> /dev/null
 r=()
 for i in {0..23}; do r+=(0000000000000000000000000000000000000000000000000000000000000000); done
 q='.. | select(.PCRIndex? and .Digests[0].Digest?) | [.PCRIndex,.Digests[0].Digest] | @tsv'
